@@ -1,0 +1,22 @@
+# Temporary files
+*.o
+*.lo
+*.la
+*.swp
+*.xml
+*.csv
+
+#dir
+bin/*
+testbin/*
+lib/
+share/
+
+libcsv-3.0.3/
+
+#csvlib
+include/csv.h
+libcsv-3.0.3/Makefile
+libcsv-3.0.3/.libs
+libcsv-3.0.3/.deps
+
