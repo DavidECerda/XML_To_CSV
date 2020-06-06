@@ -18,6 +18,35 @@ bool CXMLWriter::Flush(){
 	return wrote;
 }
 
+void CXMLWriter::LoadValues(const SXMLEntity &entity, const std::vector <char> &specialChar, std::vector<std::string> &values){
+
+	for (auto att:entity.DAttributes){
+		std::string value = std::get<1>(att);
+
+		for (unsigned int i = 0; i < value.length(); i++) {
+			auto it = std::find(specialChar.begin(),specialChar.end(),value[i]);
+			if(*it != '\0'){
+				switch(std::distance(specialChar.begin(),it)){
+					case 0 : value.replace(i,1,"&quot;");
+						break;
+					case 1 : value.replace(i,1,"&amp;");
+						break;
+					case 2 : value.replace(i,1,"&lt;");
+						break;
+					case 3 : value.replace(i,1,"&gt;");
+						break;
+					case 4 : value.replace(i,1,"&apos;");
+						break;
+					default : break;
+				}
+			}
+		}
+		values.push_back(value);
+	}
+
+	return;
+}
+
 bool CXMLWriter::WriteEntity(const SXMLEntity &entity){
 	bool wrote = false;
 
