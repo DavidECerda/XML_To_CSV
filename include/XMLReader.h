@@ -5,6 +5,7 @@
 #include <expat.h>
 #include <istream>
 #include <queue>
+#define BUFFER_SIZE 8192
 
 
 
@@ -14,6 +15,9 @@ class CXMLReader{
         std::istream &InFile;
         std::queue<struct SXMLEntity> ManyEntity;
         XML_Parser MyParser;
+        void ThrowError();
+        bool ReadSingleEntity(SXMLEntity &entity, bool skipcdata = false);
+        int ParseFile(char buffer[BUFFER_SIZE]);
     protected:
         static void start_element(void *data, const char* elem, const char** att);
         static void end_element(void *data, const char* elem);

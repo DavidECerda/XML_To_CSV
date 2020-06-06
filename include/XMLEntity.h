@@ -4,8 +4,9 @@
 #include <utility>
 #include <string>
 #include <vector>
-//element, complete element, end element, start element
 
+/// Struct to store elements of the XML file
+/// 4 types of elements: Start element, End element, Char Data, Complete element
 struct SXMLEntity{
     using TAttribute = std::pair< std::string, std::string >;
     enum class EType{StartElement, EndElement, CharData, CompleteElement};
